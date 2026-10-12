@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Email Marketing Tool</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ==========================================
+           LOGIN PAGE — DARK
+        ========================================== */
+        * {
+            box-sizing: border-box;
+        }
+        .login-page {
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(245, 166, 35, 0.10),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom right,
+                    rgba(124, 143, 255, 0.10),
+                    transparent 35%
+                ),
+                #0A0E1A;
+        }
+        .login-wrapper {
+            width: 100%;
+            max-width: 430px;
+        }
+        .login-brand {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .brand-icon {
+            width: 58px;
+            height: 58px;
+            margin: 0 auto 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+            background: #171D33;
+            border: 1px solid #262D45;
+            color: #F5A623;
+            font-size: 27px;
+            font-weight: 700;
+        }
+        .login-brand h1 {
+            margin: 0;
+            font-family: "Space Grotesk", sans-serif;
+            color: #F4F6FB;
+            font-size: 27px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+        .login-brand p {
+            margin: 8px 0 0;
+            color: #8D96AE;
+            font-size: 14px;
+        }
+        .login-card {
+            background: #12172A;
+            border: 1px solid #262D45;
+            border-radius: 18px;
+            padding: 34px;
+        }
+        .login-card h2 {
+            margin: 0 0 6px;
+            font-family: "Space Grotesk", sans-serif;
+            color: #F4F6FB;
+            font-size: 21px;
+            font-weight: 600;
+        }
+        .login-subtitle {
+            margin: 0 0 26px;
+            color: #8D96AE;
+            font-size: 14px;
+        }
+        .login-form-group {
+            margin-bottom: 20px;
+        }
+        .login-form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #C7CEDE;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .input-wrapper {
+            position: relative;
+        }
+        .login-input {
+            width: 100%;
+            height: 48px;
+            padding: 0 14px;
+            box-sizing: border-box;
+            border: 1px solid #262D45;
+            border-radius: 10px;
+            background: #0D1220;
+            color: #EDF0F7;
+            font-size: 15px;
+            outline: none;
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+        }
+        .password-input {
+            padding-right: 70px;
+        }
+        .login-input::placeholder {
+            color: #5C637A;
+        }
+        .login-input:focus {
+            border-color: #F5A623;
+            background: #171D33;
+            box-shadow:
+                0 0 0 3px rgba(245, 166, 35, 0.14);
+        }
+        .password-toggle {
+            position: absolute;
+            top: 50%;
+            right: 12px;
+            transform: translateY(-50%);
+            border: 0;
+            background: transparent;
+            color: #F5A623;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 5px;
+        }
+        .password-toggle:hover {
+            color: #FFB847;
+        }
+        .login-button {
+            width: 100%;
+            height: 48px;
+            border: 0;
+            border-radius: 10px;
+            background: #F5A623;
+            color: #0A0E1A;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease,
+                opacity 0.2s ease;
+        }
+        .login-button:hover {
+            background: #FFB847;
+            transform: translateY(-1px);
+        }
+        .login-button:active {
+            transform: translateY(0);
+        }
+        .login-button:disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+            transform: none;
+        }
+        #message {
+            min-height: 20px;
+            margin: 16px 0 0;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        #message.success {
+            color: #34D399;
+        }
+        #message.error {
+            color: #F87171;
+        }
+        .register-text {
+            margin: 24px 0 0;
+            text-align: center;
+            color: #8D96AE;
+            font-size: 14px;
+        }
+        .register-text a {
+            color: #F5A623;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .register-text a:hover {
+            text-decoration: underline;
+        }
+        .login-footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #5C637A;
+            font-size: 12px;
+        }
+        /* ==========================================
+           MOBILE
+        ========================================== */
+        @media (max-width: 480px) {
+            .login-page {
+                padding: 18px;
+            }
+            .login-card {
+                padding: 26px 20px;
+                border-radius: 15px;
+            }
+            .login-brand h1 {
+                font-size: 23px;
+            }
+            .brand-icon {
+                width: 52px;
+                height: 52px;
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body class="login-page">
+    <main class="login-wrapper">
+        <!-- BRAND -->
+        <div class="login-brand">
+            <div class="brand-icon" aria-hidden="true">
+                ✉
+            </div>
+            <h1>Email Marketing Tool</h1>
+            <p>Manage your campaigns and reach your customers.</p>
+        </div>
+        <!-- LOGIN CARD -->
+        <section class="login-card">
+            <h2>Welcome back</h2>
+            <p class="login-subtitle">Sign in to continue to your dashboard.</p>
+            <form id="loginForm" autocomplete="on">
+                <!-- EMAIL -->
+                <div class="login-form-group">
+                    <label for="email">Email address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        class="login-input"
+                        placeholder="Enter your email"
+                        autocomplete="username"
+                        required
+                    >
+                </div>
+                <!-- PASSWORD -->
+                <div class="login-form-group">
+                    <label for="password">Password</label>
+                    <div class="input-wrapper">
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            class="login-input password-input"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="passwordToggle"
+                            aria-label="Show password"
+                        >Show</button>
+                    </div>
+                </div>
+                <!-- LOGIN BUTTON -->
+                <button
+                    type="submit"
+                    class="login-button"
+                >Login</button>
+            </form>
+            <!-- MESSAGE -->
+            <p id="message" role="alert" aria-live="polite"></p>
+            <!-- REGISTER -->
+            <p class="register-text">
+                Don't have an account?
+                <a href="register.html">Create an account</a>
+            </p>
+        </section>
+        <div class="login-footer">
+            Secure campaign management made simple.
+        </div>
+    </main>
+    <script src="js/login.js"></script>
+    <script>
+        // ==========================================
+        // SHOW / HIDE PASSWORD
+        // ==========================================
+        const passwordInput = document.getElementById("password");
+        const passwordToggle = document.getElementById("passwordToggle");
+        passwordToggle.addEventListener("click", function () {
+            const isPassword =
+                passwordInput.type === "password";
+            passwordInput.type =
+                isPassword ? "text" : "password";
+            passwordToggle.textContent =
+                isPassword ? "Hide" : "Show";
+            passwordToggle.setAttribute(
+                "aria-label",
+                isPassword
+                    ? "Hide password"
+                    : "Show password"
+            );
+        });
+    </script>
+</body>
+</html>

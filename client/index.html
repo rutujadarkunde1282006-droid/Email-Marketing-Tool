@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Marketing Tool</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ==========================================
+           TOKENS
+           bg: #0A0E1A / surface: #12172A / surface-2: #171D33
+           border: #262D45 / text: #EDF0F7 / muted: #8D96AE
+           amber (sent/delivered): #F5A623 / violet (depth): #7C8FFF
+        ========================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color: #EDF0F7;
+            background: #0A0E1A;
+        }
+
+        h1, h2, h3,
+        .home-logo,
+        .preview-title,
+        .preview-number {
+            font-family: "Space Grotesk", "Inter", sans-serif;
+        }
+
+        ::selection {
+            background: rgba(245, 166, 35, 0.28);
+            color: #EDF0F7;
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid #F5A623;
+            outline-offset: 2px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* ==========================================
+           HEADER
+        ========================================== */
+
+        .home-header {
+            width: 100%;
+            background: rgba(10, 14, 26, 0.86);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #1D2338;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header-container {
+            width: min(1120px, calc(100% - 40px));
+            min-height: 72px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        /* ==========================================
+           LOGO
+        ========================================== */
+
+        .home-logo {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            color: #EDF0F7;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background: #171D33;
+            border: 1px solid #262D45;
+            color: #F5A623;
+        }
+
+        /* ==========================================
+           NAVIGATION
+        ========================================== */
+
+        .home-nav {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .home-nav a {
+            padding: 9px 13px;
+            border-radius: 8px;
+            color: #8D96AE;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .home-nav a:hover {
+            background: #171D33;
+            color: #EDF0F7;
+        }
+
+        .home-nav .nav-register {
+            padding: 10px 17px;
+            background: #F5A623;
+            color: #0A0E1A;
+            font-weight: 700;
+        }
+
+        .home-nav .nav-register:hover {
+            background: #FFB847;
+            color: #0A0E1A;
+        }
+
+        /* ==========================================
+           HERO
+        ========================================== */
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 96px 20px 90px;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 600px 400px at 12% 15%, rgba(245, 166, 35, 0.10), transparent 60%),
+                radial-gradient(ellipse 500px 500px at 88% 60%, rgba(124, 143, 255, 0.10), transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-container {
+            position: relative;
+            width: min(1050px, 100%);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+            align-items: center;
+            gap: 70px;
+        }
+
+        /* ==========================================
+           HERO CONTENT
+        ========================================== */
+
+        .hero-content {
+            max-width: 620px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            margin-bottom: 22px;
+            padding: 7px 13px 7px 10px;
+            border: 1px solid #262D45;
+            border-radius: 999px;
+            background: #12172A;
+            color: #C7CEDE;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .badge-pulse {
+            position: relative;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #F5A623;
+            flex: none;
+        }
+
+        .badge-pulse::after {
+            content: "";
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 1px solid #F5A623;
+            opacity: 0.5;
+            animation: pulse-ring 2.4s ease-out infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(0.6); opacity: 0.6; }
+            100% { transform: scale(1.8); opacity: 0; }
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-weight: 600;
+            font-size: clamp(38px, 5vw, 60px);
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+            color: #F4F6FB;
+        }
+
+        .hero h1 em {
+            font-style: normal;
+            color: #F5A623;
+        }
+
+        .hero-description {
+            max-width: 560px;
+            margin: 24px 0 0;
+            color: #8D96AE;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        /* ==========================================
+           HERO BUTTONS
+        ========================================== */
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+
+        .primary-button,
+        .secondary-button {
+            min-height: 48px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 22px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .primary-button {
+            background: #F5A623;
+            color: #0A0E1A;
+            box-shadow: 0 10px 24px rgba(245, 166, 35, 0.18);
+        }
+
+        .primary-button:hover {
+            background: #FFB847;
+            transform: translateY(-2px);
+            box-shadow: 0 14px 30px rgba(245, 166, 35, 0.24);
+        }
+
+        .secondary-button {
+            border: 1px solid #262D45;
+            background: transparent;
+            color: #C7CEDE;
+        }
+
+        .secondary-button:hover {
+            border-color: #3A4364;
+            background: #12172A;
+            transform: translateY(-2px);
+        }
+
+        /* ==========================================
+           HERO VISUAL — delivery pulse panel
+        ========================================== */
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dashboard-preview {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            border: 1px solid #262D45;
+            border-radius: 16px;
+            background: #12172A;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
+        }
+
+        .preview-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
+
+        .preview-title {
+            color: #EDF0F7;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .preview-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 10px;
+            border-radius: 999px;
+            background: rgba(245, 166, 35, 0.12);
+            color: #F5A623;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .preview-status::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #F5A623;
+        }
+
+        .preview-card {
+            padding: 16px;
+            margin-bottom: 10px;
+            border: 1px solid #1D2338;
+            border-radius: 12px;
+            background: #171D33;
+        }
+
+        .preview-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .preview-label {
+            color: #8D96AE;
+            font-size: 11px;
+            margin-bottom: 7px;
+        }
+
+        .preview-number {
+            color: #EDF0F7;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .preview-bar {
+            width: 100%;
+            height: 6px;
+            margin-top: 12px;
+            overflow: hidden;
+            border-radius: 999px;
+            background: #232B49;
+        }
+
+        .preview-bar span {
+            display: block;
+            width: 76%;
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, #F5A623, #FFCB73);
+        }
+
+        .preview-wave {
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            height: 34px;
+            margin-top: 4px;
+        }
+
+        .preview-wave span {
+            flex: 1;
+            border-radius: 2px;
+            background: #7C8FFF;
+            opacity: 0.85;
+        }
+
+        /* ==========================================
+           FEATURES
+        ========================================== */
+
+        .features {
+            padding: 30px 20px 90px;
+        }
+
+        .features-container {
+            width: min(1050px, 100%);
+            margin: 0 auto;
+        }
+
+        .section-heading {
+            max-width: 620px;
+            margin: 0 0 38px;
+        }
+
+        .section-heading h2 {
+            margin: 0;
+            font-weight: 600;
+            color: #F4F6FB;
+            font-size: 30px;
+            letter-spacing: -0.7px;
+        }
+
+        .section-heading p {
+            margin: 10px 0 0;
+            color: #8D96AE;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1px;
+            background: #1D2338;
+            border: 1px solid #1D2338;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .feature-card {
+            padding: 28px 26px;
+            background: #0D1220;
+            transition: background 0.2s ease;
+        }
+
+        .feature-card:hover {
+            background: #12172A;
+        }
+
+        .feature-icon {
+            width: 34px;
+            height: 34px;
+            margin-bottom: 20px;
+            color: #F5A623;
+        }
+
+        .feature-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .feature-card h3 {
+            margin: 0 0 8px;
+            font-weight: 600;
+            color: #EDF0F7;
+            font-size: 16px;
+        }
+
+        .feature-card p {
+            margin: 0;
+            color: #8D96AE;
+            font-size: 13px;
+            line-height: 1.65;
+        }
+
+        /* ==========================================
+           CTA
+        ========================================== */
+
+        .cta {
+            padding: 20px 20px 90px;
+        }
+
+        .cta-container {
+            position: relative;
+            overflow: hidden;
+            width: min(900px, 100%);
+            margin: 0 auto;
+            padding: 50px 34px;
+            border-radius: 20px;
+            text-align: left;
+            background: #12172A;
+            border: 1px solid #262D45;
+        }
+
+        .cta-container::after {
+            content: "";
+            position: absolute;
+            right: -60px;
+            top: -60px;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(245, 166, 35, 0.14), transparent 70%);
+        }
+
+        .cta-row {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .cta h2 {
+            margin: 0;
+            font-weight: 600;
+            color: #F4F6FB;
+            font-size: 27px;
+            max-width: 420px;
+        }
+
+        .cta p {
+            max-width: 420px;
+            margin: 10px 0 0;
+            color: #8D96AE;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        /* ==========================================
+           FOOTER
+        ========================================== */
+
+        .home-footer {
+            padding: 26px 20px;
+            border-top: 1px solid #1D2338;
+            text-align: center;
+            color: #5C637A;
+            font-size: 12px;
+        }
+
+        /* ==========================================
+           RESPONSIVE
+        ========================================== */
+
+        @media (max-width: 800px) {
+            .header-container {
+                min-height: 65px;
+                width: min(100% - 28px, 1120px);
+            }
+
+            .home-nav {
+                gap: 2px;
+            }
+
+            .home-nav a {
+                padding: 8px 9px;
+                font-size: 13px;
+            }
+
+            .hero {
+                padding: 60px 20px;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 45px;
+            }
+
+            .hero-content {
+                max-width: 700px;
+                margin: 0 auto;
+                text-align: center;
+            }
+
+            .hero-badge,
+            .hero-actions {
+                justify-content: center;
+            }
+
+            .hero-description {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-visual {
+                max-width: 460px;
+                width: 100%;
+                margin: 0 auto;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-row {
+                text-align: center;
+                justify-content: center;
+            }
+
+            .cta h2,
+            .cta p {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .header-container {
+                flex-direction: column;
+                justify-content: center;
+                padding: 13px 0;
+                gap: 8px;
+            }
+
+            .home-nav {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+                letter-spacing: -1px;
+            }
+
+            .hero-description {
+                font-size: 15px;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .primary-button,
+            .secondary-button {
+                width: 100%;
+            }
+
+            .section-heading h2,
+            .cta h2 {
+                font-size: 24px;
+            }
+
+            .cta-container {
+                padding: 32px 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ==========================================
+         HEADER
+    ========================================== -->
+
+    <header class="home-header">
+        <div class="header-container">
+
+            <a href="index.html" class="home-logo">
+                <span class="logo-icon" aria-hidden="true">✉</span>
+                <span>Email Marketing Tool</span>
+            </a>
+
+            <nav class="home-nav" aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="login.html">Login</a>
+                <a href="register.html" class="nav-register">Register</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <!-- ==========================================
+         HERO
+    ========================================== -->
+
+    <main>
+
+        <section class="hero">
+            <div class="hero-container">
+
+                <div class="hero-content">
+
+                    <div class="hero-badge">
+                        <span class="badge-pulse" aria-hidden="true"></span>
+                        Built for small teams sending real mail
+                    </div>
+
+                    <h1>
+                        Every send,
+                        <br>
+                        <em>accounted for.</em>
+                    </h1>
+
+                    <p class="hero-description">
+                        Manage your customers, write your campaigns, and
+                        watch what actually gets delivered — all from one
+                        dashboard built to stay out of your way.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="register.html" class="primary-button">Get Started</a>
+                        <a href="login.html" class="secondary-button">Sign In</a>
+                    </div>
+
+                </div>
+
+
+                <!-- DELIVERY PREVIEW -->
+
+                <div class="hero-visual">
+                    <div class="dashboard-preview">
+
+                        <div class="preview-top">
+                            <div class="preview-title">Campaign Overview</div>
+                            <div class="preview-status">Sending</div>
+                        </div>
+
+                        <div class="preview-card">
+                            <div class="preview-label">Total Campaigns</div>
+                            <div class="preview-number">24</div>
+                        </div>
+
+                        <div class="preview-card">
+                            <div class="preview-label">Emails Sent</div>
+                            <div class="preview-number">8,420</div>
+                            <div class="preview-bar"><span></span></div>
+                        </div>
+
+                        <div class="preview-card">
+                            <div class="preview-label">Delivery Rate</div>
+                            <div class="preview-number">96.8%</div>
+                            <div class="preview-wave" aria-hidden="true">
+                                <span style="height:40%"></span>
+                                <span style="height:65%"></span>
+                                <span style="height:45%"></span>
+                                <span style="height:85%"></span>
+                                <span style="height:55%"></span>
+                                <span style="height:95%"></span>
+                                <span style="height:70%"></span>
+                                <span style="height:60%"></span>
+                                <span style="height:90%"></span>
+                                <span style="height:75%"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+             FEATURES
+        ========================================== -->
+
+        <section class="features">
+            <div class="features-container">
+
+                <div class="section-heading">
+                    <h2>Everything you need, nothing you don't</h2>
+                    <p>A simple set of tools to help you manage your email marketing workflow.</p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 6h16v12H4z"/>
+                                <path d="M4 7l8 6 8-6"/>
+                            </svg>
+                        </div>
+                        <h3>Manage customers</h3>
+                        <p>Keep your customer contacts organized and ready for your next campaign.</p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 11l18-7-7 18-3-8-8-3z"/>
+                            </svg>
+                        </div>
+                        <h3>Create campaigns</h3>
+                        <p>Build and send email campaigns from one convenient dashboard.</p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 20V10M12 20V4M20 20v-7"/>
+                            </svg>
+                        </div>
+                        <h3>Track results</h3>
+                        <p>Monitor campaign performance and understand your email delivery results.</p>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+             CTA
+        ========================================== -->
+
+        <section class="cta">
+            <div class="cta-container">
+                <div class="cta-row">
+                    <div>
+                        <h2>Ready to get started?</h2>
+                        <p>Create your account and start managing your email campaigns today.</p>
+                    </div>
+                    <a href="register.html" class="primary-button">Create Your Account</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- ==========================================
+         FOOTER
+    ========================================== -->
+
+    <footer class="home-footer">
+        © 2026 Email Marketing Tool. All rights reserved.
+    </footer>
+
+</body>
+</html>

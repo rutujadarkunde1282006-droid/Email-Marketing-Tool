@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dashboard - Email Marketing Tool</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================
+           DASHBOARD PAGE — DARK
+           bg: #0A0E1A / surface: #12172A / surface-2: #171D33
+           border: #262D45 / text: #EDF0F7 / muted: #8D96AE
+           accent (amber): #F5A623 / violet: #7C8FFF
+        ========================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+
+            min-height: 100vh;
+
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            color: #EDF0F7;
+
+            background: #0A0E1A;
+        }
+
+        h1, h2, h3 {
+            font-family: "Space Grotesk", "Inter", sans-serif;
+        }
+
+        /* ==========================================
+           HEADER
+        ========================================== */
+
+        .dashboard-header {
+            width: 100%;
+
+            background: rgba(10, 14, 26, 0.86);
+            backdrop-filter: blur(10px);
+
+            border-bottom: 1px solid #1D2338;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .dashboard-header-inner {
+            width: min(1180px, calc(100% - 40px));
+
+            min-height: 72px;
+
+            margin: 0 auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 25px;
+        }
+
+        /* ==========================================
+           BRAND
+        ========================================== */
+
+        .dashboard-brand {
+            display: flex;
+            align-items: center;
+
+            gap: 11px;
+
+            color: #EDF0F7;
+
+            text-decoration: none;
+
+            font-size: 18px;
+            font-weight: 600;
+
+            white-space: nowrap;
+        }
+
+        .dashboard-brand-icon {
+            width: 40px;
+            height: 40px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 11px;
+
+            background: #171D33;
+            border: 1px solid #262D45;
+
+            color: #F5A623;
+
+            font-size: 19px;
+        }
+
+        /* ==========================================
+           NAVIGATION
+        ========================================== */
+
+        .dashboard-nav {
+            display: flex;
+            align-items: center;
+
+            gap: 5px;
+
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .dashboard-nav a {
+            padding: 9px 12px;
+
+            border-radius: 8px;
+
+            color: #8D96AE;
+
+            font-size: 13px;
+            font-weight: 500;
+
+            text-decoration: none;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease;
+        }
+
+        .dashboard-nav a:hover {
+            background: #171D33;
+
+            color: #EDF0F7;
+        }
+
+        .dashboard-nav a.active {
+            background: #171D33;
+
+            color: #F5A623;
+        }
+
+        .logout-button {
+            margin-left: 5px;
+
+            padding: 9px 14px;
+
+            border: 1px solid #262D45;
+
+            border-radius: 8px;
+
+            background: transparent;
+
+            color: #F87171;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .logout-button:hover {
+            background: rgba(248, 113, 113, 0.10);
+
+            border-color: rgba(248, 113, 113, 0.35);
+        }
+
+        /* ==========================================
+           MAIN
+        ========================================== */
+
+        .dashboard-main {
+            width: min(1180px, calc(100% - 40px));
+
+            margin: 0 auto;
+
+            padding: 35px 0 60px;
+        }
+
+        /* ==========================================
+           PAGE TITLE
+        ========================================== */
+
+        .page-heading {
+            margin-bottom: 25px;
+        }
+
+        .page-heading h1 {
+            margin: 0;
+
+            font-weight: 600;
+
+            color: #F4F6FB;
+
+            font-size: 30px;
+
+            letter-spacing: -0.7px;
+        }
+
+        .page-heading p {
+            margin: 7px 0 0;
+
+            color: #8D96AE;
+
+            font-size: 14px;
+        }
+
+        /* ==========================================
+           USER CARD
+        ========================================== */
+
+        .user-card {
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+
+            margin-bottom: 28px;
+
+            padding: 22px;
+
+            border: 1px solid #262D45;
+
+            border-radius: 15px;
+
+            background: #12172A;
+        }
+
+        .user-avatar {
+            width: 48px;
+            height: 48px;
+
+            flex: 0 0 48px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 13px;
+
+            background: #171D33;
+            border: 1px solid #262D45;
+
+            color: #F5A623;
+
+            font-size: 21px;
+            font-weight: 600;
+        }
+
+        .user-details {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 4px;
+        }
+
+        .welcome-text {
+            margin: 0;
+
+            color: #EDF0F7;
+
+            font-size: 15px;
+        }
+
+        .email-text {
+            margin: 0;
+
+            color: #8D96AE;
+
+            font-size: 13px;
+        }
+
+        /* ==========================================
+           ANALYTICS SECTION
+        ========================================== */
+
+        .analytics-section {
+            margin-bottom: 35px;
+        }
+
+        .section-heading-row {
+            display: flex;
+
+            align-items: flex-end;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            margin-bottom: 17px;
+        }
+
+        .section-heading-row h2 {
+            margin: 0;
+
+            font-weight: 600;
+
+            color: #F4F6FB;
+
+            font-size: 21px;
+        }
+
+        .section-heading-row p {
+            margin: 5px 0 0;
+
+            color: #8D96AE;
+
+            font-size: 13px;
+        }
+
+        /* ==========================================
+           ANALYTICS CARDS
+        ========================================== */
+
+        .analytics-cards {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 15px;
+        }
+
+        .analytics-card {
+            min-height: 125px;
+
+            padding: 20px;
+
+            border: 1px solid #262D45;
+
+            border-radius: 14px;
+
+            background: #12172A;
+
+            transition:
+                transform 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .analytics-card:hover {
+            transform: translateY(-2px);
+
+            border-color: #3A4364;
+        }
+
+        .analytics-card h3 {
+            margin: 0;
+
+            color: #8D96AE;
+
+            font-size: 12px;
+            font-weight: 650;
+
+            line-height: 1.4;
+        }
+
+        .analytics-card p {
+            margin: 13px 0 0;
+
+            color: #EDF0F7;
+
+            font-size: 28px;
+            font-weight: 700;
+
+            line-height: 1;
+
+            font-family: "Space Grotesk", sans-serif;
+        }
+
+        /* ==========================================
+           RECENT CAMPAIGNS
+        ========================================== */
+
+        .recent-campaigns-section {
+            overflow: hidden;
+
+            border: 1px solid #262D45;
+
+            border-radius: 16px;
+
+            background: #12172A;
+        }
+
+        .recent-campaigns-header {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 22px 24px;
+
+            border-bottom: 1px solid #1D2338;
+        }
+
+        .recent-campaigns-title {
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+        }
+
+        .campaign-header-icon {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 11px;
+
+            background: #171D33;
+            border: 1px solid #262D45;
+
+            color: #F5A623;
+
+            font-size: 18px;
+        }
+
+        .recent-campaigns-title h2 {
+            margin: 0;
+
+            font-weight: 600;
+
+            color: #F4F6FB;
+
+            font-size: 19px;
+        }
+
+        .recent-campaigns-title p {
+            margin: 4px 0 0;
+
+            color: #8D96AE;
+
+            font-size: 12px;
+        }
+
+        .view-all-campaigns-btn {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding: 9px 13px;
+
+            border: 1px solid #262D45;
+
+            border-radius: 8px;
+
+            color: #F5A623;
+
+            background: transparent;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            text-decoration: none;
+
+            white-space: nowrap;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .view-all-campaigns-btn:hover {
+            background: rgba(245, 166, 35, 0.08);
+
+            border-color: rgba(245, 166, 35, 0.35);
+        }
+
+        /* ==========================================
+           CAMPAIGN TABLE
+        ========================================== */
+
+        .campaign-table-wrapper {
+            width: 100%;
+
+            overflow-x: auto;
+        }
+
+        .campaign-table {
+            width: 100%;
+
+            min-width: 850px;
+
+            border-collapse: collapse;
+
+            table-layout: auto;
+        }
+
+        .campaign-table th {
+            padding: 13px 15px;
+
+            border-bottom: 1px solid #262D45;
+
+            background: #0D1220;
+
+            color: #8D96AE;
+
+            font-size: 11px;
+            font-weight: 750;
+
+            letter-spacing: 0.3px;
+
+            text-align: center;
+
+            white-space: nowrap;
+        }
+
+        .campaign-table td {
+            padding: 16px 15px;
+
+            border-bottom: 1px solid #1D2338;
+
+            color: #C7CEDE;
+
+            font-size: 13px;
+
+            text-align: center;
+
+            vertical-align: middle;
+        }
+
+        .campaign-table tbody tr {
+            transition:
+                background 0.15s ease;
+        }
+
+        .campaign-table tbody tr:hover {
+            background: #171D33;
+        }
+
+        .campaign-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .campaign-table td:first-child {
+            color: #EDF0F7;
+
+            font-weight: 700;
+
+            text-align: left;
+        }
+
+        /* ==========================================
+           TABLE STATUS SUPPORT
+        ========================================== */
+
+        .campaign-status {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 5px 9px;
+
+            border-radius: 999px;
+
+            font-size: 10px;
+            font-weight: 750;
+
+            white-space: nowrap;
+        }
+
+        .campaign-status.sent {
+            background: rgba(52, 211, 153, 0.12);
+
+            color: #34D399;
+        }
+
+        .campaign-status.draft {
+            background: #1D2338;
+
+            color: #8D96AE;
+        }
+
+        .campaign-status.failed {
+            background: rgba(248, 113, 113, 0.12);
+
+            color: #F87171;
+        }
+
+        .campaign-status.sending {
+            background: rgba(124, 143, 255, 0.12);
+
+            color: #7C8FFF;
+        }
+
+        /* ==========================================
+           EMPTY STATE
+        ========================================== */
+
+        .empty-campaigns {
+            padding: 45px 20px;
+
+            text-align: center;
+
+            color: #5C637A;
+
+            font-size: 13px;
+        }
+
+        /* ==========================================
+           FOOTER
+        ========================================== */
+
+        .recent-campaigns-footer {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding: 15px 24px;
+
+            border-top: 1px solid #1D2338;
+
+            background: #0D1220;
+        }
+
+        .campaign-footer-info {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            color: #5C637A;
+
+            font-size: 12px;
+        }
+
+        .view-all-link {
+            color: #F5A623;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            text-decoration: none;
+        }
+
+        .view-all-link:hover {
+            text-decoration: underline;
+        }
+
+        /* ==========================================
+           RESPONSIVE - TABLET
+        ========================================== */
+
+        @media (max-width: 950px) {
+
+            .dashboard-header-inner {
+                flex-direction: column;
+
+                align-items: stretch;
+
+                padding: 13px 0;
+
+                gap: 10px;
+            }
+
+            .dashboard-brand {
+                justify-content: center;
+            }
+
+            .dashboard-nav {
+                justify-content: center;
+            }
+
+            .analytics-cards {
+                grid-template-columns:
+                    repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        /* ==========================================
+           RESPONSIVE - MOBILE
+        ========================================== */
+
+        @media (max-width: 680px) {
+
+            .dashboard-header-inner {
+                width: min(
+                    100% - 24px,
+                    1180px
+                );
+            }
+
+            .dashboard-main {
+                width: min(
+                    100% - 24px,
+                    1180px
+                );
+
+                padding-top: 25px;
+            }
+
+            .dashboard-nav {
+                gap: 2px;
+            }
+
+            .dashboard-nav a {
+                padding: 8px 8px;
+
+                font-size: 12px;
+            }
+
+            .logout-button {
+                padding: 8px 10px;
+
+                font-size: 12px;
+            }
+
+            .page-heading h1 {
+                font-size: 26px;
+            }
+
+            .analytics-cards {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
+                gap: 10px;
+            }
+
+            .analytics-card {
+                min-height: 110px;
+
+                padding: 16px;
+            }
+
+            .analytics-card p {
+                font-size: 24px;
+            }
+
+            .recent-campaigns-header {
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                padding: 18px;
+            }
+
+            .view-all-campaigns-btn {
+                width: 100%;
+
+                justify-content: center;
+            }
+
+            .recent-campaigns-footer {
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                padding: 14px 18px;
+            }
+        }
+
+        @media (max-width: 420px) {
+
+            .dashboard-brand {
+                font-size: 16px;
+            }
+
+            .dashboard-brand-icon {
+                width: 36px;
+                height: 36px;
+            }
+
+            .dashboard-nav {
+                display: grid;
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+                width: 100%;
+            }
+
+            .dashboard-nav a,
+            .logout-button {
+                width: 100%;
+
+                text-align: center;
+            }
+
+            .logout-button {
+                margin-left: 0;
+            }
+
+            .analytics-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .user-card {
+                align-items: flex-start;
+
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- ==========================================
+         HEADER
+    ========================================== -->
+
+    <header class="dashboard-header">
+
+        <div class="dashboard-header-inner">
+
+            <a
+                href="dashboard.html"
+                class="dashboard-brand"
+            >
+                <span
+                    class="dashboard-brand-icon"
+                    aria-hidden="true"
+                >
+                    ✉
+                </span>
+
+                <span>
+                    Email Marketing Tool
+                </span>
+            </a>
+
+
+            <nav
+                class="dashboard-nav"
+                aria-label="Dashboard navigation"
+            >
+
+                <a
+                    href="dashboard.html"
+                    class="active"
+                >
+                    Dashboard
+                </a>
+
+                <a href="templates.html">
+                    Templates
+                </a>
+
+                <a href="contacts.html">
+                    Customers
+                </a>
+
+                <a href="campaigns.html">
+                    Campaigns
+                </a>
+
+                <button
+                    type="button"
+                    id="logoutButton"
+                    class="logout-button"
+                >
+                    Logout
+                </button>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         MAIN DASHBOARD
+    ========================================== -->
+
+    <main class="dashboard-main">
+
+
+        <!-- PAGE HEADING -->
+
+        <div class="page-heading">
+
+            <h1>
+                Dashboard
+            </h1>
+
+            <p>
+                Monitor your campaigns and email performance.
+            </p>
+
+        </div>
+
+
+        <!-- ==========================================
+             USER INFORMATION
+        ========================================== -->
+
+        <section class="user-card">
+
+            <div
+                class="user-avatar"
+                aria-hidden="true"
+            >
+                👤
+            </div>
+
+            <div class="user-details">
+
+                <p class="welcome-text">
+
+                    Welcome,
+
+                    <strong id="userName">
+                        Loading...
+                    </strong>
+
+                </p>
+
+                <p class="email-text">
+
+                    Email:
+
+                    <strong id="userEmail">
+                        Loading...
+                    </strong>
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             OVERALL CAMPAIGN ANALYTICS
+        ========================================== -->
+
+        <section class="analytics-section">
+
+            <div class="section-heading-row">
+
+                <div>
+
+                    <h2>
+                        Overall Campaign Analytics
+                    </h2>
+
+                    <p>
+                        A quick overview of your campaign performance.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="analytics-cards">
+
+
+                <!-- TOTAL CAMPAIGNS -->
+
+                <div class="analytics-card">
+
+                    <h3>
+                        Total Campaigns
+                    </h3>
+
+                    <p id="analyticsTotalCampaigns">
+                        0
+                    </p>
+
+                </div>
+
+
+                <!-- SENT CAMPAIGNS -->
+
+                <div class="analytics-card">
+
+                    <h3>
+                        Sent Campaigns
+                    </h3>
+
+                    <p id="analyticsSentCampaigns">
+                        0
+                    </p>
+
+                </div>
+
+
+                <!-- DRAFT CAMPAIGNS -->
+
+                <div class="analytics-card">
+
+                    <h3>
+                        Draft Campaigns
+                    </h3>
+
+                    <p id="analyticsDraftCampaigns">
+                        0
+                    </p>
+
+                </div>
+
+
+                <!-- FAILED CAMPAIGNS -->
+
+                <div class="analytics-card">
+
+                    <h3>
+                        Failed Campaigns
+                    </h3>
+
+                    <p id="analyticsFailedCampaigns">
+                        0
+                    </p>
+
+                </div>
+
+
+                <!-- SENDING CAMPAIGNS -->
+
+                <div class="analytics-card">
+
+                    <h3>
+                        Sending Campaigns
+                    </h3>
+
+                    <p id="analyticsSendingCampaigns">
+                        0
+                    </p>
+
+                </div>
+
+
+                <!-- TOTAL RECIPIENTS -->
+
+                <div class="analytics-card">
+
+                    <h3>
+                        Total Recipients
+                    </h3>
+
+                    <p id="analyticsTotalRecipients">
+                        0
+                    </p>
+
+                </div>
+
+
+                <!-- TOTAL SENT -->
+
+                <div class="analytics-card">
+
+                    <h3>
+                        Total Emails Sent
+                    </h3>
+
+                    <p id="analyticsTotalSent">
+                        0
+                    </p>
+
+                </div>
+
+
+                <!-- TOTAL FAILED -->
+
+                <div class="analytics-card">
+
+                    <h3>
+                        Total Emails Failed
+                    </h3>
+
+                    <p id="analyticsTotalFailed">
+                        0
+                    </p>
+
+                </div>
+
+
+                <!-- TOTAL SKIPPED -->
+
+                <div class="analytics-card">
+
+                    <h3>
+                        Total Emails Skipped
+                    </h3>
+
+                    <p id="analyticsTotalSkipped">
+                        0
+                    </p>
+
+                </div>
+
+
+                <!-- DELIVERY RATE -->
+
+                <div class="analytics-card">
+
+                    <h3>
+                        Delivery Rate
+                    </h3>
+
+                    <p id="analyticsDeliveryRate">
+                        0%
+                    </p>
+
+                </div>
+
+
+                <!-- FAILURE RATE -->
+
+                <div class="analytics-card">
+
+                    <h3>
+                        Failure Rate
+                    </h3>
+
+                    <p id="analyticsFailureRate">
+                        0%
+                    </p>
+
+                </div>
+
+
+                <!-- SKIP RATE -->
+
+                <div class="analytics-card">
+
+                    <h3>
+                        Skip Rate
+                    </h3>
+
+                    <p id="analyticsSkipRate">
+                        0%
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             RECENT CAMPAIGNS
+        ========================================== -->
+
+        <section class="recent-campaigns-section">
+
+
+            <!-- SECTION HEADER -->
+
+            <div class="recent-campaigns-header">
+
+                <div class="recent-campaigns-title">
+
+                    <div
+                        class="campaign-header-icon"
+                        aria-hidden="true"
+                    >
+                        ✉
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Recent Campaigns
+                        </h2>
+
+                        <p>
+                            Your latest email campaigns
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <a
+                    href="campaigns.html"
+                    class="view-all-campaigns-btn"
+                >
+
+                    <span aria-hidden="true">
+                        ▣
+                    </span>
+
+                    View All Campaigns
+
+                </a>
+
+            </div>
+
+
+            <!-- CAMPAIGN TABLE -->
+
+            <div class="campaign-table-wrapper">
+
+                <table
+                    class="campaign-table"
+                    aria-label="Recent email campaigns"
+                >
+
+                    <thead>
+
+                        <tr>
+
+                            <th scope="col">
+                                Campaign
+                            </th>
+
+                            <th scope="col">
+                                Subject
+                            </th>
+
+                            <th scope="col">
+                                Status
+                            </th>
+
+                            <th scope="col">
+                                Recipients
+                            </th>
+
+                            <th scope="col">
+                                Sent
+                            </th>
+
+                            <th scope="col">
+                                Failed
+                            </th>
+
+                            <th scope="col">
+                                Skipped
+                            </th>
+
+                            <th scope="col">
+                                Date
+                            </th>
+
+                        </tr>
+
+                    </thead>
+                    <tbody id="recentCampaigns">
+                        <!-- Campaigns will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+            <!-- FOOTER -->
+            <div class="recent-campaigns-footer">
+                <div class="campaign-footer-info">
+                    <span aria-hidden="true">
+                        ▤
+                    </span>
+                    <span id="recentCampaignCount">
+                        Showing 0 of your recent campaigns
+                    </span>
+                </div>
+                <a
+                    href="campaigns.html"
+                    class="view-all-link"
+                >
+                    View all campaigns →
+                </a>
+            </div>
+        </section>
+    </main>
+    <!-- ==========================================
+         JAVASCRIPT
+    ========================================== -->
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>

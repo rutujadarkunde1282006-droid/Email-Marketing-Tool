@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Email Templates - Email Marketing Tool</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/style.css"
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================
+           TEMPLATES PAGE — DARK
+        ========================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+
+            min-height: 100vh;
+
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            color: #EDF0F7;
+
+            background: #0A0E1A;
+        }
+
+        h1, h2, h3 {
+            font-family: "Space Grotesk", "Inter", sans-serif;
+        }
+
+        /* ==========================================
+           HEADER
+        ========================================== */
+
+        .dashboard-header {
+            width: 100%;
+
+            background: rgba(10, 14, 26, 0.86);
+            backdrop-filter: blur(10px);
+
+            border-bottom: 1px solid #1D2338;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .dashboard-header-inner {
+            width: min(1180px, calc(100% - 40px));
+
+            min-height: 72px;
+
+            margin: 0 auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 25px;
+        }
+
+        /* ==========================================
+           BRAND
+        ========================================== */
+
+        .dashboard-brand {
+            display: flex;
+            align-items: center;
+
+            gap: 11px;
+
+            color: #EDF0F7;
+
+            text-decoration: none;
+
+            font-size: 18px;
+            font-weight: 600;
+
+            white-space: nowrap;
+        }
+
+        .dashboard-brand-icon {
+            width: 40px;
+            height: 40px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 11px;
+
+            background: #171D33;
+            border: 1px solid #262D45;
+
+            color: #F5A623;
+
+            font-size: 19px;
+        }
+
+        /* ==========================================
+           NAVIGATION
+        ========================================== */
+
+        .dashboard-nav {
+            display: flex;
+            align-items: center;
+
+            gap: 5px;
+
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .dashboard-nav a {
+            padding: 9px 12px;
+
+            border-radius: 8px;
+
+            color: #8D96AE;
+
+            font-size: 13px;
+            font-weight: 500;
+
+            text-decoration: none;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease;
+        }
+
+        .dashboard-nav a:hover {
+            background: #171D33;
+
+            color: #EDF0F7;
+        }
+
+        .dashboard-nav a.active {
+            background: #171D33;
+
+            color: #F5A623;
+        }
+
+        .logout-button {
+            margin-left: 5px;
+
+            padding: 9px 14px;
+
+            border: 1px solid #262D45;
+
+            border-radius: 8px;
+
+            background: transparent;
+
+            color: #F87171;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .logout-button:hover {
+            background: rgba(248, 113, 113, 0.10);
+
+            border-color: rgba(248, 113, 113, 0.35);
+        }
+
+        /* ==========================================
+           MAIN
+        ========================================== */
+
+        .dashboard-main {
+            width: min(1180px, calc(100% - 40px));
+
+            margin: 0 auto;
+
+            padding: 35px 0 60px;
+        }
+
+        /* ==========================================
+           PAGE TITLE
+        ========================================== */
+
+        .page-heading {
+            margin-bottom: 25px;
+        }
+
+        .page-heading h1 {
+            margin: 0;
+
+            font-weight: 600;
+
+            color: #F4F6FB;
+
+            font-size: 30px;
+
+            letter-spacing: -0.7px;
+        }
+
+        .page-heading p {
+            margin: 7px 0 0;
+
+            color: #8D96AE;
+
+            font-size: 14px;
+        }
+
+        /* ==========================================
+           TEMPLATE FORM CARD
+        ========================================== */
+
+        .template-form-section {
+            margin-bottom: 35px;
+
+            padding: 24px;
+
+            border: 1px solid #262D45;
+
+            border-radius: 15px;
+
+            background: #12172A;
+        }
+
+        .template-form-section h2 {
+            margin: 0 0 4px;
+
+            font-weight: 600;
+
+            color: #F4F6FB;
+
+            font-size: 19px;
+        }
+
+        .template-form-subtitle {
+            margin: 0 0 20px;
+
+            color: #8D96AE;
+
+            font-size: 13px;
+        }
+
+        .form-field {
+            margin-bottom: 16px;
+        }
+
+        .form-field label {
+            display: block;
+
+            margin-bottom: 6px;
+
+            color: #C7CEDE;
+
+            font-size: 13px;
+            font-weight: 650;
+        }
+
+        .form-field input,
+        .form-field textarea {
+            width: 100%;
+
+            padding: 11px 13px;
+
+            border: 1px solid #262D45;
+
+            border-radius: 9px;
+
+            background: #0D1220;
+
+            color: #EDF0F7;
+
+            font-family: inherit;
+            font-size: 13px;
+
+            transition:
+                border-color 0.15s ease,
+                background 0.15s ease;
+        }
+
+        .form-field input::placeholder,
+        .form-field textarea::placeholder {
+            color: #5C637A;
+        }
+
+        .form-field input:focus,
+        .form-field textarea:focus {
+            outline: none;
+
+            border-color: #F5A623;
+
+            background: #171D33;
+        }
+
+        .form-field textarea {
+            resize: vertical;
+
+            min-height: 160px;
+
+            line-height: 1.5;
+        }
+
+        .form-actions {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-top: 6px;
+        }
+
+        .save-template-button {
+            padding: 11px 18px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: #F5A623;
+
+            color: #0A0E1A;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.15s ease,
+                background 0.15s ease;
+        }
+
+        .save-template-button:hover {
+            background: #FFB847;
+
+            transform: translateY(-1px);
+        }
+
+        .cancel-edit-button {
+            padding: 11px 18px;
+
+            border: 1px solid #262D45;
+
+            border-radius: 9px;
+
+            background: transparent;
+
+            color: #C7CEDE;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                background 0.15s ease,
+                border-color 0.15s ease;
+        }
+
+        .cancel-edit-button:hover {
+            background: #171D33;
+
+            border-color: #3A4364;
+        }
+
+        .form-message {
+            margin: 14px 0 0;
+
+            color: #34D399;
+
+            font-size: 13px;
+            font-weight: 650;
+        }
+
+        .form-message:empty {
+            margin: 0;
+        }
+
+        /* ==========================================
+           SAVED TEMPLATES
+        ========================================== */
+
+        .saved-templates-section {
+            overflow: hidden;
+
+            border: 1px solid #262D45;
+
+            border-radius: 16px;
+
+            background: #12172A;
+        }
+
+        .section-header {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 22px 24px;
+
+            border-bottom: 1px solid #1D2338;
+        }
+
+        .section-header h2 {
+            margin: 0;
+
+            font-weight: 600;
+
+            color: #F4F6FB;
+
+            font-size: 19px;
+        }
+
+        .section-header p {
+            margin: 4px 0 0;
+
+            color: #8D96AE;
+
+            font-size: 12px;
+        }
+
+        .templates-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 16px;
+
+            padding: 24px;
+        }
+
+        .template-card {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 10px;
+
+            padding: 18px;
+
+            border: 1px solid #262D45;
+
+            border-radius: 13px;
+
+            background: #0D1220;
+
+            transition:
+                transform 0.15s ease,
+                border-color 0.15s ease;
+        }
+
+        .template-card:hover {
+            transform: translateY(-2px);
+
+            border-color: #3A4364;
+        }
+
+        .template-card h3 {
+            margin: 0;
+
+            font-weight: 600;
+
+            color: #EDF0F7;
+
+            font-size: 15px;
+        }
+
+        .template-card .template-subject {
+            margin: 0;
+
+            color: #8D96AE;
+
+            font-size: 12px;
+        }
+
+        .template-card .template-preview {
+            margin: 0;
+
+            color: #5C637A;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+
+            overflow: hidden;
+        }
+
+        .template-card-actions {
+            display: flex;
+
+            gap: 8px;
+
+            margin-top: 4px;
+        }
+
+        .template-edit-button,
+        .template-delete-button {
+            flex: 1;
+
+            padding: 8px 10px;
+
+            border-radius: 8px;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                background 0.15s ease,
+                border-color 0.15s ease;
+        }
+
+        .template-edit-button {
+            border: 1px solid #262D45;
+
+            background: transparent;
+
+            color: #F5A623;
+        }
+
+        .template-edit-button:hover {
+            background: rgba(245, 166, 35, 0.08);
+
+            border-color: rgba(245, 166, 35, 0.35);
+        }
+
+        .template-delete-button {
+            border: 1px solid #262D45;
+
+            background: transparent;
+
+            color: #F87171;
+        }
+
+        .template-delete-button:hover {
+            background: rgba(248, 113, 113, 0.08);
+
+            border-color: rgba(248, 113, 113, 0.35);
+        }
+
+        .empty-templates {
+            grid-column: 1 / -1;
+
+            padding: 45px 20px;
+
+            text-align: center;
+
+            color: #5C637A;
+
+            font-size: 13px;
+        }
+
+        /* ==========================================
+           RESPONSIVE - TABLET
+        ========================================== */
+
+        @media (max-width: 950px) {
+
+            .dashboard-header-inner {
+                flex-direction: column;
+
+                align-items: stretch;
+
+                padding: 13px 0;
+
+                gap: 10px;
+            }
+
+            .dashboard-brand {
+                justify-content: center;
+            }
+
+            .dashboard-nav {
+                justify-content: center;
+            }
+
+            .templates-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        /* ==========================================
+           RESPONSIVE - MOBILE
+        ========================================== */
+
+        @media (max-width: 680px) {
+
+            .dashboard-header-inner {
+                width: min(
+                    100% - 24px,
+                    1180px
+                );
+            }
+
+            .dashboard-main {
+                width: min(
+                    100% - 24px,
+                    1180px
+                );
+
+                padding-top: 25px;
+            }
+
+            .dashboard-nav {
+                gap: 2px;
+            }
+
+            .dashboard-nav a {
+                padding: 8px 8px;
+
+                font-size: 12px;
+            }
+
+            .logout-button {
+                padding: 8px 10px;
+
+                font-size: 12px;
+            }
+
+            .page-heading h1 {
+                font-size: 26px;
+            }
+
+            .template-form-section {
+                padding: 18px;
+            }
+
+            .section-header {
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                padding: 18px;
+            }
+
+            .templates-grid {
+                grid-template-columns: 1fr;
+
+                padding: 18px;
+            }
+
+            .form-actions {
+                flex-direction: column;
+
+                align-items: stretch;
+            }
+        }
+
+        @media (max-width: 420px) {
+
+            .dashboard-brand {
+                font-size: 16px;
+            }
+
+            .dashboard-brand-icon {
+                width: 36px;
+                height: 36px;
+            }
+
+            .dashboard-nav {
+                display: grid;
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+                width: 100%;
+            }
+
+            .dashboard-nav a,
+            .logout-button {
+                width: 100%;
+
+                text-align: center;
+            }
+
+            .logout-button {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- ==========================================
+         HEADER
+    ========================================== -->
+
+    <header class="dashboard-header">
+
+        <div class="dashboard-header-inner">
+
+            <a
+                href="dashboard.html"
+                class="dashboard-brand"
+            >
+                <span
+                    class="dashboard-brand-icon"
+                    aria-hidden="true"
+                >
+                    ✉
+                </span>
+
+                <span>
+                    Email Marketing Tool
+                </span>
+            </a>
+
+
+            <nav
+                class="dashboard-nav"
+                aria-label="Dashboard navigation"
+            >
+
+                <a href="dashboard.html">
+                    Dashboard
+                </a>
+
+                <a
+                    href="templates.html"
+                    class="active"
+                >
+                    Templates
+                </a>
+
+                <a href="contacts.html">
+                    Customers
+                </a>
+
+                <a href="campaigns.html">
+                    Campaigns
+                </a>
+
+                <button
+                    type="button"
+                    id="logoutButton"
+                    class="logout-button"
+                >
+                    Logout
+                </button>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         MAIN
+    ========================================== -->
+
+    <main class="dashboard-main">
+
+
+        <!-- PAGE HEADING -->
+
+        <div class="page-heading">
+
+            <h1>
+                Email Templates
+            </h1>
+
+            <p>
+                Create and manage reusable email templates.
+            </p>
+
+        </div>
+
+
+        <!-- ======================================
+             CREATE / EDIT TEMPLATE
+        ======================================= -->
+
+        <section class="template-form-section">
+
+            <h2 id="formTitle">
+                Create Email Template
+            </h2>
+
+            <p class="template-form-subtitle">
+                Fill in the details below and save it to reuse in a campaign.
+            </p>
+
+
+            <form id="templateForm">
+
+    <div class="form-field">
+        <label for="templateName">
+            Template Name
+        </label>
+
+        <input
+            type="text"
+            id="templateName"
+            placeholder="Example: Welcome Email"
+            required
+        >
+    </div>
+
+
+    <div class="form-field">
+        <label for="templateSubject">
+            Email Subject
+        </label>
+
+        <input
+            type="text"
+            id="templateSubject"
+            placeholder="Example: Welcome {{name}}!"
+            required
+        >
+    </div>
+
+
+    <div class="form-field">
+        <label for="templateContent">
+            Email Content
+        </label>
+
+        <textarea
+            id="templateContent"
+            rows="10"
+            placeholder="Hello {{name}},&#10;&#10;Welcome to our newsletter!"
+            required
+        ></textarea>
+    </div>
+
+
+    <div class="form-actions">
+
+        <button
+            type="submit"
+            id="saveTemplateButton"
+            class="save-template-button"
+        >
+            Save Template
+        </button>
+
+        <button
+            type="button"
+            id="cancelEditButton"
+            class="cancel-edit-button"
+            style="display:none;"
+        >
+            Cancel Edit
+        </button>
+
+    </div>
+
+</form>
+
+<p id="message" class="form-message"></p>
+
+
+<section class="saved-templates-section">
+
+    <div class="section-header">
+
+        <div>
+            <h2>Saved Templates</h2>
+
+            <p>
+                Manage your saved email templates
+            </p>
+        </div>
+
+    </div>
+
+
+    <div
+        id="templatesList"
+        class="templates-grid"
+    >
+    </div>
+
+</section>
+    </main>
+
+
+    <!-- ==========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script src="/js/templates.js"></script>
+
+</body>
+
+</html>
